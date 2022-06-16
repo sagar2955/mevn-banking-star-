@@ -107,12 +107,12 @@ exports.deleteById = (req,res,next) =>{
 // Delete All
 exports.deleteAll = (req,res,next) =>{
 
-    BankingCustomerModel.deleteAll((err,result) => {
+    BankingCustomerModel.deleteMany((err,result) => {
         if(err)
             next(err)
         res.json({
             status:"Success",
-            message:"Successfully Deleted customer By ID",
+            message:"Successfully Deleted ALL customer By ID",
             data:{
                 customer: result
             }
