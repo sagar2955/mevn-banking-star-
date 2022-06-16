@@ -5,9 +5,10 @@ mongoose.Promise = global.Promise
 
 const db = {}
 db.mongoose = mongoose
-db.mongoUrl = dbConfig.mongoURI
+db.mongoUrl = dbConfig.mongoURl
 
-//Database Name
+// Database Name
 db.banking = require("./banking.model")(mongoose)
 
 module.exports = db
+
