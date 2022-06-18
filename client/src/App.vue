@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+      <nav class="navbar navbar-dark bg-primary justify-content-between flex no-wrap flex-row">
+        <div class="container mt-3">
+          <a class="navbar-brand float-left">BANKING APP</a>
+          <ul class="nav navbar-nav flex-row">
+
+            <li class="nav-item">
+              <router-link class="nav-link pr-3" to="/">Home</router-link>
+            </li>
+           
+            <li class="nav-item">
+              <router-link class="nav-link" to="/addCustomer">Add Customer</router-link>
+            </li>
+
+             <li class="nav-item">
+              <router-link class="nav-link" to="/customers">Customers</router-link>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+
+
+      <!--Router View-->
+      <div class="container mt-5">
+        <router-view></router-view>
+      </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name:'App'
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

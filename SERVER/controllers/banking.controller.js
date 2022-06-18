@@ -5,6 +5,30 @@ const jwt = require('jsonwebtoken')
 const BankingCustomerModel = db.banking
 
 
+exports.login = (req,res,next) => {
+    BankingCustomerModel.findOne({email : req.body.email}, (err,result) => {
+        if(err){       
+             next(err)
+             console.log("invalid user")
+        }
+        else{
+            if(bcrypt.compare(req.body.password,result.password)){
+                const token = jwt.sign({id:result._id},req.app.get('secretKey'), {expiresIn:'1h'})
+                res.json({
+                    status:"Success",
+                    message:"Successfully Logged in",
+                    data: {
+                        user: result,
+                        token: token
+                    }
+                })
+            }
+        }
+    })
+}
+
+
+
 // Create
 exports.create = (req,res,next) =>{
     let {name,mobile,address,email,password} = req.body
@@ -76,7 +100,7 @@ exports.getByEmail = (req,res,next) =>{
 }
 // Update
 exports.updateById = (req,res,next) =>{
-    BankingCustomerModel.findByIdAndUpdate(req.params.id,req.body,(err,result) => {
+    BankingCustomerModel.Update({id:req.params.id},req.body,(err,result) => {
         if(err)
             next(err)
         res.json({
@@ -91,7 +115,7 @@ exports.updateById = (req,res,next) =>{
 }
 // Delete By Id
 exports.deleteById = (req,res,next) =>{
-    BankingCustomerModel.findByIdAndRemove(req.params.id,(err,result) => {
+    BankingCustomerModel.remove({id:req.params.id},(err,result) => {
         if(err)
             next(err)
         res.json({

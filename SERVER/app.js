@@ -3,19 +3,22 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const logger = require('morgan')
 const router = require('./routes/banking.route')
+
 require('dotenv').config()
 
 
 const app = express()
 
 var corsOptions = {
-    origin:"http://localhost:8081"
+    origin:"http://localhost:8080"
 }
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(logger('dev'))
-app.use('/api',router)
+app.set('secretKey','hdjsakfhdjsk')
+app.use('/api', router)
+
 
 app.get('/', (req,res) => {
     res.json({
@@ -23,7 +26,7 @@ app.get('/', (req,res) => {
     })
 })
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8081
 
 app.listen(PORT, () => {
     console.log(`Server is up and running on ${PORT}`)
